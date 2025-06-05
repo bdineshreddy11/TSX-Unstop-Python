@@ -1,0 +1,255 @@
+{
+  "basics": {
+    "name": "Dinesh Reddy",
+    "label": "Full Stack Developer & Data Analytics Enthusiast",
+    "email": "bellamdinesh1123@gmail.com",
+    "phone": "+91 9494950344",
+    "website": "https://dineshreddy.dev",
+    "summary": "Passionate Computer Science Engineering student with hands-on experience in full-stack development and data analytics. Specialized in React.js, Node.js, and modern web technologies. Currently pursuing Bachelor of Technology with a focus on creating innovative solutions and scalable applications.",
+    "location": {
+      "city": "Hyderabad",
+      "region": "Telangana",
+      "countryCode": "IN"
+    },
+    "profiles": [
+      {
+        "network": "LinkedIn",
+        "username": "dinesh-reddy",
+        "url": "https://linkedin.com/in/dinesh-reddy"
+      },
+      {
+        "network": "GitHub",
+        "username": "dineshreddy",
+        "url": "https://github.com/dineshreddy"
+      },
+      {
+        "network": "Twitter",
+        "username": "dineshreddy_dev",
+        "url": "https://twitter.com/dineshreddy_dev"
+      }
+    ]
+  },
+  "work": [
+    {
+      "company": "AWS APAC Solutions Architecture",
+      "position": "Virtual Experience Participant",
+      "website": "https://aws.amazon.com",
+      "startDate": "2025-02-01",
+      "endDate": "2025-02-28",
+      "summary": "Completed virtual experience program focusing on cloud architecture solutions",
+      "highlights": [
+        "Designed simple and scalable hosting architecture based on Elastic Beanstalk",
+        "Optimized application performance and response times",
+        "Described proposed architecture in plain language for client understanding",
+        "Calculated hosting costs and performance metrics"
+      ]
+    },
+    {
+      "company": "Deloitte Australia",
+      "position": "Data Analytics Job Simulation Participant",
+      "website": "https://deloitte.com",
+      "startDate": "2025-02-01",
+      "endDate": "2025-02-28",
+      "summary": "Completed comprehensive data analytics simulation involving forensic technology",
+      "highlights": [
+        "Completed Deloitte job simulation involving data analysis and forensic technology",
+        "Created interactive data dashboard using Tableau",
+        "Used Excel to classify data and draw business conclusions",
+        "Applied statistical analysis techniques for business insights"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "CVR College of Engineering",
+      "area": "Computer Science and Engineering",
+      "studyType": "Bachelor of Technology",
+      "startDate": "2022-06-01",
+      "endDate": "2026-04-30",
+      "gpa": "8.5",
+      "location": "Hyderabad, India",
+      "courses": [
+        "Data Structures and Algorithms",
+        "Database Management Systems",
+        "Web Technologies",
+        "Software Engineering",
+        "Computer Networks"
+      ]
+    },
+    {
+      "institution": "Narayana Junior College",
+      "area": "Mathematics, Physics, Chemistry",
+      "studyType": "Intermediate",
+      "startDate": "2020-06-01",
+      "endDate": "2022-04-30",
+      "gpa": "9.2",
+      "location": "Hyderabad, India"
+    }
+  ],
+  "skills": [
+    {
+      "name": "Programming Languages",
+      "level": "Advanced",
+      "keywords": [
+        "Java",
+        "Python",
+        "C",
+        "JavaScript"
+      ]
+    },
+    {
+      "name": "Full Stack Development",
+      "level": "Advanced",
+      "keywords": [
+        "React.js",
+        "Node.js",
+        "Express.js",
+        "HTML5",
+        "CSS3"
+      ]
+    },
+    {
+      "name": "Database & Cloud",
+      "level": "Intermediate",
+      "keywords": [
+        "MongoDB",
+        "MySQL",
+        "AWS",
+        "Cloud Architecture"
+      ]
+    },
+    {
+      "name": "Data Analysis & Visualization",
+      "level": "Intermediate",
+      "keywords": [
+        "Tableau",
+        "Excel",
+        "Data Analytics",
+        "Business Intelligence"
+      ]
+    },
+    {
+      "name": "Styling & Frameworks",
+      "level": "Advanced",
+      "keywords": [
+        "CSS",
+        "Bootstrap",
+        "Responsive Design",
+        "UI/UX"
+      ]
+    },
+    {
+      "name": "Developer Tools",
+      "level": "Intermediate",
+      "keywords": [
+        "Git",
+        "VS Code",
+        "Postman",
+        "Replit",
+        "SendGrid"
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Resume Builder Application",
+      "description": "A comprehensive resume building platform with real-time editing, multiple templates, and email functionality. Built to help users create professional resumes with ease and efficiency.",
+      "highlights": [
+        "Led feedback sessions and gathered insights from 300+ users to enhance the Resume Builder",
+        "Achieved a 90% satisfaction rate and built strong user trust",
+        "Implemented real-time user authentication and resume tracking",
+        "Increased engagement by 20% with seamless user experience",
+        "Improved donor communication with automated updates for 200 users via SendGrid",
+        "Saved 30 hours monthly in manual handling",
+        "Scaled platform operations to support over 100 users ensuring consistent performance and accessibility"
+      ],
+      "keywords": [
+        "Node.js",
+        "Express.js",
+        "React",
+        "MongoDB",
+        "Bootstrap",
+        "SendGrid"
+      ],
+      "url": "https://github.com/dineshreddy/resume-builder",
+      "startDate": "2024-06-01",
+      "endDate": "2024-07-31"
+    },
+    {
+      "name": "AWS Cloud Architecture Solution",
+      "description": "Designed and implemented scalable cloud hosting architecture using AWS Elastic Beanstalk for optimal performance and cost-effectiveness.",
+      "highlights": [
+        "Designed simple and scalable hosting architecture based on Elastic Beanstalk",
+        "Optimized for better user experience and response times",
+        "Described proposed architecture in plain language for client understanding",
+        "Calculated hosting costs and performance benefits",
+        "Implemented best practices for cloud security and scalability"
+      ],
+      "keywords": [
+        "AWS",
+        "Elastic Beanstalk",
+        "Cloud Architecture",
+        "Scalability",
+        "Performance Optimization"
+      ],
+      "url": "https://github.com/dineshreddy/aws-architecture",
+      "startDate": "2025-02-01",
+      "endDate": "2025-02-28"
+    },
+    {
+      "name": "Data Analytics Dashboard",
+      "description": "Interactive business intelligence dashboard created using Tableau and Excel for comprehensive data analysis and visualization.",
+      "highlights": [
+        "Completed Deloitte job simulation involving data analysis and forensic technology",
+        "Created comprehensive data dashboard using Tableau",
+        "Used Excel to classify data and draw meaningful business conclusions",
+        "Applied statistical analysis techniques for actionable insights",
+        "Presented findings to stakeholders with clear visualizations"
+      ],
+      "keywords": [
+        "Tableau",
+        "Excel",
+        "Data Analysis",
+        "Business Intelligence",
+        "Data Visualization"
+      ],
+      "url": "https://github.com/dineshreddy/data-analytics-dashboard",
+      "startDate": "2025-02-01",
+      "endDate": "2025-02-28"
+    }
+  ],
+  "certificates": [
+    {
+      "name": "Infosys Certified Introduction to Data Science",
+      "issuer": "Infosys",
+      "date": "2024-12-01",
+      "url": "https://infosys.com/certificates"
+    },
+    {
+      "name": "ORACLE Academy Certified Database Design",
+      "issuer": "Oracle Academy",
+      "date": "2024-11-01",
+      "url": "https://academy.oracle.com"
+    },
+    {
+      "name": "Learning Through Java",
+      "issuer": "Oracle",
+      "date": "2024-10-01",
+      "url": "https://oracle.com/java"
+    }
+  ],
+  "languages": [
+    {
+      "language": "English",
+      "fluency": "Professional working proficiency"
+    },
+    {
+      "language": "Telugu",
+      "fluency": "Native speaker"
+    },
+    {
+      "language": "Hindi",
+      "fluency": "Conversational"
+    }
+  ]
+}

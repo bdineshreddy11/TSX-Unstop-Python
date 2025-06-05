@@ -1,0 +1,84 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Add New Project{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1 class="page-title">
+        <i class="fas fa-plus"></i> Add New Project
+    </h1>
+    <a href="{{ url_for('admin_projects') }}" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Back to Projects
+    </a>
+</div>
+
+<div class="form-container">
+    <form method="POST">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="name" class="form-label">Project Name *</label>
+                <input type="text" id="name" name="name" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="status" class="form-label">Status</label>
+                <select id="status" name="status" class="form-control">
+                    <option value="completed">Completed</option>
+                    <option value="in-progress">In Progress</option>
+                    <option value="planned">Planned</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="description" class="form-label">Description *</label>
+            <textarea id="description" name="description" class="form-control" required 
+                      placeholder="Brief description of the project"></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="highlights" class="form-label">Key Highlights</label>
+            <textarea id="highlights" name="highlights" class="form-control" 
+                      placeholder="Enter each highlight on a new line"></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="keywords" class="form-label">Technologies/Keywords</label>
+            <input type="text" id="keywords" name="keywords" class="form-control" 
+                   placeholder="React, Node.js, MongoDB (comma-separated)">
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label for="startDate" class="form-label">Start Date</label>
+                <input type="date" id="startDate" name="startDate" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="endDate" class="form-label">End Date</label>
+                <input type="date" id="endDate" name="endDate" class="form-control">
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="url" class="form-label">Project URL</label>
+            <input type="url" id="url" name="url" class="form-control" 
+                   placeholder="https://github.com/username/project">
+        </div>
+        
+        <div class="form-group">
+            <div class="checkbox-group">
+                <input type="checkbox" id="featured" name="featured">
+                <label for="featured" class="form-label">Featured Project</label>
+            </div>
+        </div>
+        
+        <div class="btn-group">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i> Save Project
+            </button>
+            <a href="{{ url_for('admin_projects') }}" class="btn btn-secondary">
+                <i class="fas fa-times"></i> Cancel
+            </a>
+        </div>
+    </form>
+</div>
+{% endblock %}

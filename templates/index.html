@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+
+{% block title %}{{ resume.basics.name }} - Portfolio{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-text animate__animated animate__fadeInLeft">
+                <h1 class="hero-title">Hi, I'm <span class="highlight">{{ resume.basics.name }}</span></h1>
+                <h2 class="hero-subtitle">{{ resume.basics.label }}</h2>
+                <p class="hero-description">{{ resume.basics.summary }}</p>
+                <div class="hero-buttons">
+                    <a href="{{ url_for('projects') }}" class="btn btn-primary">View My Work</a>
+                    <a href="{{ url_for('contact') }}" class="btn btn-secondary">Contact Me</a>
+                </div>
+            </div>
+            <div class="hero-image animate__animated animate__fadeInRight">
+                <img src="{{ url_for('static', filename='images/profile.jpg') }}" alt="Profile Image"
+                    class="profile-image">
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="skills-section">
+    <div class="container">
+        <h2 class="section-title">My Skills</h2>
+        <div class="skills-container">
+            {% for skill in resume.skills %}
+            <div class="skill-card animate__animated animate__fadeInUp" data-wow-delay="{{ loop.index0 * 0.2 }}s">
+                <div class="skill-icon">
+                    {% if skill.name == "Programming Languages" %}
+                    <i class="fas fa-code"></i>
+                    {% elif skill.name == "Full Stack Development" %}
+                    <i class="fas fa-laptop-code"></i>
+                    {% elif skill.name == "Database & Cloud" %}
+                    <i class="fas fa-database"></i>
+                    {% elif skill.name == "Data Analysis & Visualization" %}
+                    <i class="fas fa-chart-bar"></i>
+                    {% elif skill.name == "Styling & Frameworks" %}
+                    <i class="fas fa-paint-brush"></i>
+                    {% elif skill.name == "Developer Tools" %}
+                    <i class="fas fa-tools"></i>
+                    {% else %}
+                    <i class="fas fa-laptop-code"></i>
+                    {% endif %}
+                </div>
+                <h3 class="skill-title">{{ skill.name }}</h3>
+                <div class="skill-level">
+                    <div class="skill-progress"
+                        style="width: {% if skill.level == 'Advanced' %}90%{% elif skill.level == 'Intermediate' %}70%{% else %}50%{% endif %}">
+                    </div>
+                </div>
+                <div class="skill-keywords">
+                    {% for keyword in skill.keywords %}
+                    <span class="skill-keyword">{{ keyword }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="featured-projects">
+    <div class="container">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="projects-grid">
+            {% for project in resume.projects[:3] %}
+            <div class="project-card animate__animated animate__fadeInUp" data-wow-delay="{{ loop.index0 * 0.2 }}s">
+                <div class="project-image">
+                    {% if project.get('image') %}
+                    <img src="{{ url_for('static', filename='images/' + project.image) }}" alt="{{ project.name }}"
+                        onerror="this.src='/placeholder.svg?height=300&width=500&text={{ project.name }}'">
+                    {% else %}
+                    <img src="/placeholder.svg?height=300&width=500&text={{ project.name }}" alt="{{ project.name }}">
+                    {% endif %}
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">{{ project.name }}</h3>
+                    <p class="project-description">{{ project.description }}</p>
+                    <div class="project-tags">
+                        {% for keyword in project.keywords %}
+                        <span class="project-tag">{{ keyword }}</span>
+                        {% endfor %}
+                    </div>
+                    <a href="{{ url_for('project_detail', project_name=project.name) }}" class="btn btn-sm">View
+                        Details</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-4">
+            <a href="{{ url_for('projects') }}" class="btn btn-primary">View All Projects</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

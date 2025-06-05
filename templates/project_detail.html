@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block title %}{{ project.name }} - Project Details{% endblock %}
+
+{% block content %}
+<section class="project-detail-section">
+    <div class="container">
+        <div class="project-detail-header">
+            <a href="{{ url_for('projects') }}" class="back-link animate__animated animate__fadeInLeft">
+                <i class="fas fa-arrow-left"></i> Back to Projects
+            </a>
+            <h1 class="page-title animate__animated animate__fadeInDown">{{ project.name }}</h1>
+        </div>
+
+        <div class="project-detail-content">
+            <div class="project-detail-gallery animate__animated animate__fadeInUp">
+                <div class="project-main-image">
+                    {% if project.image %}
+                    <img src="{{ url_for('static', filename='images/' + project.image) }}" alt="{{ project.name }}">
+                    {% else %}
+                    <img src="/placeholder.svg?height=500&width=800&text={{ project.name }}" alt="{{ project.name }}">
+                    {% endif %}
+                </div>
+                <div class="project-thumbnails">
+                    <div class="project-thumbnail active">
+                        {% if project.image %}
+                        <img src="{{ url_for('static', filename='images/' + project.image) }}" alt="Main View">
+                        {% else %}
+                        <img src="/placeholder.svg?height=100&width=100&text=1" alt="Thumbnail 1">
+                        {% endif %}
+                    </div>
+                    <div class="project-thumbnail">
+                        <img src="/placeholder.svg?height=100&width=100&text=2" alt="Thumbnail 2">
+                    </div>
+                    <div class="project-thumbnail">
+                        <img src="/placeholder.svg?height=100&width=100&text=3" alt="Thumbnail 3">
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-detail-info animate__animated animate__fadeInUp" data-wow-delay="0.2s">
+                <div class="project-detail-description">
+                    <h2>Project Overview</h2>
+                    <p>{{ project.description }}</p>
+
+                    <h3>Key Features</h3>
+                    <ul class="project-features">
+                        {% for highlight in project.highlights %}
+                        <li>{{ highlight }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="project-detail-meta">
+                    <div class="project-meta-item">
+                        <h3>Technologies</h3>
+                        <div class="project-tags">
+                            {% for keyword in project.keywords %}
+                            <span class="project-tag">{{ keyword }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <div class="project-meta-item">
+                        <h3>Project Link</h3>
+                        <a href="{{ project.url }}" target="_blank" class="project-link">
+                            <i class="fab fa-github"></i> View on GitHub
+                        </a>
+                    </div>
+
+                    <div class="project-meta-item">
+                        <h3>Project Duration</h3>
+                        <p>{{ project.startDate }} - {{ project.endDate }}</p>
+                    </div>
+
+                    <div class="project-meta-item">
+                        <h3>Status</h3>
+                        <span class="project-status status-{{ project.status }}">{{ project.status|title }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const thumbnails = document.querySelectorAll('.project-thumbnail');
+        const mainImage = document.querySelector('.project-main-image img');
+
+        thumbnails.forEach((thumbnail, index) => {
+            thumbnail.addEventListener('click', function () {
+                // Update active thumbnail
+                thumbnails.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+
+                // Update main image
+                const thumbnailImg = this.querySelector('img');
+                if (thumbnailImg.src.includes('placeholder')) {
+                    mainImage.src = `/placeholder.svg?height=500&width=800&text=${index + 1}`;
+                    mainImage.alt = `Project Image ${index + 1}`;
+                } else {
+                    mainImage.src = thumbnailImg.src;
+                    mainImage.alt = thumbnailImg.alt;
+                }
+
+                // Add animation
+                mainImage.classList.remove('animate__fadeIn');
+                void mainImage.offsetWidth; // Trigger reflow
+                mainImage.classList.add('animate__fadeIn');
+            });
+        });
+    });
+</script>
+{% endblock %}

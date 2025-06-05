@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}Projects{% endblock %}
+
+{% block content %}
+<section class="projects-section">
+    <div class="container">
+        <h1 class="page-title animate__animated animate__fadeInDown">My Projects</h1>
+
+        <div class="projects-filter animate__animated animate__fadeIn">
+            <button class="filter-btn active" data-filter="all">All</button>
+            {% set categories = [] %}
+            {% for project in projects %}
+            {% for keyword in project.keywords %}
+            {% if keyword not in categories %}
+            {% set categories = categories + [keyword] %}
+            {% endif %}
+            {% endfor %}
+            {% endfor %}
+
+            {% for category in categories %}
+            <button class="filter-btn" data-filter="{{ category }}">{{ category }}</button>
+            {% endfor %}
+        </div>
+
+        <div class="projects-grid">
+            {% for project in projects %}
+            <div class="project-card animate__animated animate__fadeInUp" data-wow-delay="{{ loop.index0 * 0.2 }}s"
+                data-categories="{% for keyword in project.keywords %}{{ keyword }} {% endfor %}">
+                <div class="project-image">
+                    {% if project.image %}
+                    <img src="{{ url_for('static', filename='images/' + project.image) }}" alt="{{ project.name }}">
+                    {% else %}
+                    <img src="/placeholder.svg?height=300&width=500&text={{ project.name }}" alt="{{ project.name }}">
+                    {% endif %}
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">{{ project.name }}</h3>
+                    <p class="project-description">{{ project.description }}</p>
+                    <div class="project-tags">
+                        {% for keyword in project.keywords %}
+                        <span class="project-tag">{{ keyword }}</span>
+                        {% endfor %}
+                    </div>
+                    <a href="{{ url_for('project_detail', project_name=project.name) }}" class="btn btn-sm">View
+                        Details</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const filter = this.getAttribute('data-filter');
+
+                // Update active button
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+
+                // Filter projects
+                projectCards.forEach(card => {
+                    if (filter === 'all') {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.classList.add('animate__fadeInUp');
+                        }, 1);
+                    } else {
+                        const categories = card.getAttribute('data-categories');
+                        if (categories.includes(filter)) {
+                            card.style.display = 'block';
+                            setTimeout(() => {
+                                card.classList.add('animate__fadeInUp');
+                            }, 1);
+                        } else {
+                            card.classList.remove('animate__fadeInUp');
+                            card.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
+    });
+</script>
+{% endblock %}

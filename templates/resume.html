@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+
+{% block title %}Resume - {{ resume.basics.name }}{% endblock %}
+
+{% block content %}
+<section class="resume-section">
+    <div class="container">
+        <div class="resume-header">
+            <h1 class="page-title animate__animated animate__fadeInDown">Resume</h1>
+            <a href="{{ url_for('resume_pdf') }}" class="btn btn-primary animate__animated animate__fadeInRight"
+                target="_blank">
+                <i class="fas fa-download"></i> Download PDF
+            </a>
+        </div>
+
+        <div class="resume-content">
+            <div class="resume-sidebar animate__animated animate__fadeInLeft">
+                <div class="resume-profile">
+                    <img src="{{ url_for('static', filename='images/profile.jpg') }}" alt="Profile Image"
+                        class="resume-profile-image">
+                    <h2 class="resume-name">{{ resume.basics.name }}</h2>
+                    <h3 class="resume-title">{{ resume.basics.label }}</h3>
+                </div>
+
+                <div class="resume-contact">
+                    <h3 class="resume-section-title">Contact</h3>
+                    <ul class="resume-contact-list">
+                        <li>
+                            <span class="contact-icon"><i class="fas fa-map-marker-alt"></i></span>
+                            <span class="contact-text">{{ resume.basics.location.city }}, {{
+                                resume.basics.location.region }}</span>
+                        </li>
+                        <li>
+                            <span class="contact-icon"><i class="fas fa-envelope"></i></span>
+                            <span class="contact-text">{{ resume.basics.email }}</span>
+                        </li>
+                        <li>
+                            <span class="contact-icon"><i class="fas fa-phone"></i></span>
+                            <span class="contact-text">{{ resume.basics.phone }}</span>
+                        </li>
+                        <li>
+                            <span class="contact-icon"><i class="fas fa-globe"></i></span>
+                            <span class="contact-text">{{ resume.basics.website }}</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="resume-skills">
+                    <h3 class="resume-section-title">Skills</h3>
+                    {% for skill in resume.skills %}
+                    <div class="skill-group">
+                        <h4 class="skill-group-title">{{ skill.name }}</h4>
+                        <div class="skill-level">
+                            <div class="skill-progress"
+                                style="width: {% if skill.level == 'Advanced' %}90%{% elif skill.level == 'Intermediate' %}70%{% else %}50%{% endif %}">
+                            </div>
+                        </div>
+                        <div class="skill-keywords">
+                            {% for keyword in skill.keywords %}
+                            <span class="skill-keyword">{{ keyword }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="resume-main animate__animated animate__fadeInRight">
+                <div class="resume-section">
+                    <h3 class="resume-section-title">Summary</h3>
+                    <div class="resume-summary">
+                        <p>{{ resume.basics.summary }}</p>
+                    </div>
+                </div>
+
+                <div class="resume-section">
+                    <h3 class="resume-section-title">Work Experience</h3>
+                    {% for work in resume.work %}
+                    <div class="resume-item">
+                        <div class="resume-item-header">
+                            <h4 class="resume-item-title">{{ work.position }}</h4>
+                            <div class="resume-item-date">{{ work.startDate[:4] }} - {{ work.endDate[:4] if work.endDate
+                                != 'Present' else work.endDate }}</div>
+                        </div>
+                        <h5 class="resume-item-subtitle">{{ work.company }}</h5>
+                        <p class="resume-item-description">{{ work.summary }}</p>
+                        <ul class="resume-item-list">
+                            {% for highlight in work.highlights %}
+                            <li>{{ highlight }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="resume-section">
+                    <h3 class="resume-section-title">Education</h3>
+                    {% for edu in resume.education %}
+                    <div class="resume-item">
+                        <div class="resume-item-header">
+                            <h4 class="resume-item-title">{{ edu.studyType }} in {{ edu.area }}</h4>
+                            <div class="resume-item-date">{{ edu.startDate[:4] }} - {{ edu.endDate[:4] }}</div>
+                        </div>
+                        <h5 class="resume-item-subtitle">{{ edu.institution }}</h5>
+                        <p class="resume-item-description">GPA: {{ edu.gpa }}</p>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="resume-section">
+                    <h3 class="resume-section-title">Projects</h3>
+                    <div class="resume-projects">
+                        {% for project in resume.projects %}
+                        <div class="resume-project">
+                            <h4 class="resume-project-title">{{ project.name }}</h4>
+                            <p class="resume-project-description">{{ project.description }}</p>
+                            <div class="resume-project-tags">
+                                {% for keyword in project.keywords %}
+                                <span class="resume-project-tag">{{ keyword }}</span>
+                                {% endfor %}
+                            </div>
+                            <a href="{{ project.url }}" target="_blank" class="resume-project-link">View Project</a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

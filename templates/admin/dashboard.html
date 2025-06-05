@@ -1,0 +1,100 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1 class="page-title">
+        <i class="fas fa-tachometer-alt"></i> Admin Dashboard
+    </h1>
+    <p class="dashboard-subtitle">Manage your portfolio content</p>
+</div>
+
+<div class="dashboard-stats">
+    <div class="stat-card">
+        <div class="stat-icon">
+            <i class="fas fa-project-diagram"></i>
+        </div>
+        <div class="stat-content">
+            <h3>{{ projects|length }}</h3>
+            <p>Total Projects</p>
+        </div>
+    </div>
+    
+    <div class="stat-card">
+        <div class="stat-icon">
+            <i class="fas fa-star"></i>
+        </div>
+        <div class="stat-content">
+            <h3>{{ projects|selectattr('featured')|list|length }}</h3>
+            <p>Featured Projects</p>
+        </div>
+    </div>
+    
+    <div class="stat-card">
+        <div class="stat-icon">
+            <i class="fas fa-clock"></i>
+        </div>
+        <div class="stat-content">
+            <h3>{{ projects|selectattr('status', 'equalto', 'in-progress')|list|length }}</h3>
+            <p>In Progress</p>
+        </div>
+    </div>
+</div>
+
+<div class="dashboard-actions">
+    <h2 class="section-title">Quick Actions</h2>
+    <div class="action-grid">
+        <a href="{{ url_for('admin_add_project') }}" class="action-card">
+            <div class="action-icon">
+                <i class="fas fa-plus"></i>
+            </div>
+            <h3>Add New Project</h3>
+            <p>Create a new project entry</p>
+        </a>
+        
+        <a href="{{ url_for('admin_projects') }}" class="action-card">
+            <div class="action-icon">
+                <i class="fas fa-edit"></i>
+            </div>
+            <h3>Manage Projects</h3>
+            <p>Edit existing projects</p>
+        </a>
+        
+        <a href="{{ url_for('index') }}" class="action-card" target="_blank">
+            <div class="action-icon">
+                <i class="fas fa-eye"></i>
+            </div>
+            <h3>View Portfolio</h3>
+            <p>See your live portfolio</p>
+        </a>
+    </div>
+</div>
+
+<div class="recent-projects">
+    <h2 class="section-title">Recent Projects</h2>
+    <div class="projects-list">
+        {% for project in projects[:5] %}
+        <div class="project-item">
+            <div class="project-info">
+                <h4>{{ project.name }}</h4>
+                <p>{{ project.description[:100] }}...</p>
+                <div class="project-meta">
+                    <span class="project-status status-{{ project.status }}">{{ project.status|title }}</span>
+                    {% if project.featured %}
+                    <span class="project-featured">
+                        <i class="fas fa-star"></i> Featured
+                    </span>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="project-actions">
+                <a href="{{ url_for('admin_edit_project', project_id=project.id) }}" class="btn btn-sm btn-secondary">
+                    <i class="fas fa-edit"></i> Edit
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}About Me - {{ resume.basics.name }}{% endblock %}
+
+{% block content %}
+<section class="about-hero">
+    <div class="container">
+        <h1 class="page-title animate__animated animate__fadeInDown">About Me</h1>
+        <div class="about-content">
+            <div class="about-image animate__animated animate__fadeInLeft">
+                <img src="{{ url_for('static', filename='images/profile.jpg') }}" alt="Profile Image" class="profile-image">
+            </div>
+            <div class="about-text animate__animated animate__fadeInRight">
+                <h2>{{ resume.basics.name }}</h2>
+                <h3>{{ resume.basics.label }}</h3>
+                <p class="about-description">{{ resume.basics.summary }}</p>
+                
+                <div class="about-details">
+                    <div class="detail-item">
+                        <span class="detail-icon"><i class="fas fa-map-marker-alt"></i></span>
+                        <span class="detail-text">{{ resume.basics.location.city }}, {{ resume.basics.location.region }}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-icon"><i class="fas fa-envelope"></i></span>
+                        <span class="detail-text">{{ resume.basics.email }}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-icon"><i class="fas fa-phone"></i></span>
+                        <span class="detail-text">{{ resume.basics.phone }}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-icon"><i class="fas fa-globe"></i></span>
+                        <span class="detail-text">{{ resume.basics.website }}</span>
+                    </div>
+                </div>
+                
+                <div class="about-social">
+                    {% for profile in resume.basics.profiles %}
+                    <a href="{{ profile.url }}" target="_blank" class="social-icon">
+                        {% if profile.network == "LinkedIn" %}
+                        <i class="fab fa-linkedin"></i>
+                        {% elif profile.network == "GitHub" %}
+                        <i class="fab fa-github"></i>
+                        {% elif profile.network == "Twitter" %}
+                        <i class="fab fa-twitter"></i>
+                        {% else %}
+                        <i class="fas fa-link"></i>
+                        {% endif %}
+                    </a>
+                    {% endfor %}
+                </div>
+                
+                <div class="about-buttons">
+                    <a href="{{ url_for('resume') }}" class="btn btn-primary">View Resume</a>
+                    <a href="{{ url_for('contact') }}" class="btn btn-secondary">Contact Me</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="timeline-section">
+    <div class="container">
+        <h2 class="section-title">My Journey</h2>
+        <div class="timeline">
+            {% for work in resume.work %}
+            <div class="timeline-item animate__animated animate__fadeInUp" data-wow-delay="{{ loop.index0 * 0.2 }}s">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">{{ work.startDate[:4] }} - {{ work.endDate[:4] if work.endDate != 'Present' else work.endDate }}</div>
+                <div class="timeline-content">
+                    <h3>{{ work.position }}</h3>
+                    <h4>{{ work.company }}</h4>
+                    <p>{{ work.summary }}</p>
+                    <ul class="timeline-list">
+                        {% for highlight in work.highlights %}
+                        <li>{{ highlight }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            {% endfor %}
+            
+            {% for edu in resume.education %}
+            <div class="timeline-item animate__animated animate__fadeInUp" data-wow-delay="{{ (loop.index0 + resume.work|length) * 0.2 }}s">
+                <div class="timeline-dot"></div>
+                <div class="timeline-date">{{ edu.startDate[:4] }} - {{ edu.endDate[:4] }}</div>
+                <div class="timeline-content">
+                    <h3>{{ edu.studyType }} in {{ edu.area }}</h3>
+                    <h4>{{ edu.institution }}</h4>
+                    <p>GPA: {{ edu.gpa }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}

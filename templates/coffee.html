@@ -1,0 +1,109 @@
+{% extends "base.html" %}
+
+{% block title %}Coffee Break{% endblock %}
+
+{% block content %}
+<section class="coffee-section">
+    <div class="container">
+        <h1 class="page-title animate__animated animate__fadeInDown">Coffee Break</h1>
+        
+        <div class="coffee-content">
+            <div class="coffee-text animate__animated animate__fadeInLeft">
+                <h2>Let's Take a Break</h2>
+                <p>Everyone needs a moment to relax. This is my virtual coffee corner where I share some thoughts, quotes, and maybe a joke or two.</p>
+                
+                <div class="coffee-quote">
+                    <blockquote>
+                        "The only way to do great work is to love what you do."
+                        <cite>— Steve Jobs</cite>
+                    </blockquote>
+                </div>
+                
+                <div class="coffee-joke">
+                    <h3>Developer Joke of the Day</h3>
+                    <p>Why do programmers prefer dark mode?</p>
+                    <p class="joke-answer">Because light attracts bugs!</p>
+                </div>
+                
+                <div class="coffee-music">
+                    <h3>What I'm Listening To</h3>
+                    <div class="music-player">
+                        <div class="music-info">
+                            <div class="music-thumbnail">
+                                <img src="/placeholder.svg?height=60&width=60&text=Album" alt="Album Cover">
+                            </div>
+                            <div class="music-details">
+                                <h4>Coding Playlist</h4>
+                                <p>Various Artists</p>
+                            </div>
+                        </div>
+                        <div class="music-controls">
+                            <button class="music-control" id="play-button">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="coffee-animation animate__animated animate__fadeInRight">
+                <div class="coffee-cup">
+                    <div class="coffee-cup-body">
+                        <div class="coffee-cup-liquid"></div>
+                    </div>
+                    <div class="coffee-cup-handle"></div>
+                    <div class="coffee-steam">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="coffee-gallery animate__animated animate__fadeInUp">
+            <h3>Inspiration Gallery</h3>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="/placeholder.svg?height=200&width=200&text=Workspace" alt="Workspace">
+                </div>
+                <div class="gallery-item">
+                    <img src="/placeholder.svg?height=200&width=200&text=Nature" alt="Nature">
+                </div>
+                <div class="gallery-item">
+                    <img src="/placeholder.svg?height=200&width=200&text=Books" alt="Books">
+                </div>
+                <div class="gallery-item">
+                    <img src="/placeholder.svg?height=200&width=200&text=Travel" alt="Travel">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const playButton = document.getElementById('play-button');
+        const jokeAnswer = document.querySelector('.joke-answer');
+        
+        // Toggle play button
+        playButton.addEventListener('click', function() {
+            const icon = this.querySelector('i');
+            if (icon.classList.contains('fa-play')) {
+                icon.classList.remove('fa-play');
+                icon.classList.add('fa-pause');
+            } else {
+                icon.classList.remove('fa-pause');
+                icon.classList.add('fa-play');
+            }
+        });
+        
+        // Reveal joke answer on click
+        document.querySelector('.coffee-joke p').addEventListener('click', function() {
+            jokeAnswer.classList.toggle('show');
+        });
+    });
+</script>
+{% endblock %}

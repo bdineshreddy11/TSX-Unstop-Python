@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Portfolio{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <div class="page-wrapper">
+        <header class="header">
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <a href="{{ url_for('index') }}" class="logo-link">
+                            <span class="logo-text">Portfolio</span>
+                        </a>
+                    </div>
+                    <nav class="nav">
+                        <button class="nav-toggle" aria-label="Toggle navigation">
+                            <span class="hamburger"></span>
+                        </button>
+                        <ul class="nav-menu">
+                            <li class="nav-item"><a href="{{ url_for('index') }}" class="nav-link {% if request.path == url_for('index') %}active{% endif %}">Home</a></li>
+                            <li class="nav-item"><a href="{{ url_for('about') }}" class="nav-link {% if request.path == url_for('about') %}active{% endif %}">About</a></li>
+                            <li class="nav-item"><a href="{{ url_for('resume') }}" class="nav-link {% if request.path == url_for('resume') %}active{% endif %}">Resume</a></li>
+                            <li class="nav-item"><a href="{{ url_for('projects') }}" class="nav-link {% if request.path == url_for('projects') %}active{% endif %}">Projects</a></li>
+                            <li class="nav-item"><a href="{{ url_for('contact') }}" class="nav-link {% if request.path == url_for('contact') %}active{% endif %}">Contact</a></li>
+                            <li class="nav-item"><a href="{{ url_for('coffee') }}" class="nav-link {% if request.path == url_for('coffee') %}active{% endif %}">Coffee Break</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+
+        <main class="main">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="container">
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ category }} animate__animated animate__fadeIn">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-info">
+                        <p>&copy; <span id="current-year"></span> Portfolio. All rights reserved.</p>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://github.com" target="_blank" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="https://linkedin.com" target="_blank" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://twitter.com" target="_blank" class="social-link"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("current-year").textContent = new Date().getFullYear();
+        });
+    </script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,87 @@
+{% extends "admin/base.html" %}
+
+{% block title %}Edit Project{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <h1 class="page-title">
+        <i class="fas fa-edit"></i> Edit Project
+    </h1>
+    <a href="{{ url_for('admin_projects') }}" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Back to Projects
+    </a>
+</div>
+
+<div class="form-container">
+    <form method="POST">
+        <div class="form-row">
+            <div class="form-group">
+                <label for="name" class="form-label">Project Name *</label>
+                <input type="text" id="name" name="name" class="form-control" 
+                       value="{{ project.name }}" required>
+            </div>
+            <div class="form-group">
+                <label for="status" class="form-label">Status</label>
+                <select id="status" name="status" class="form-control">
+                    <option value="completed" {% if project.status == 'completed' %}selected{% endif %}>Completed</option>
+                    <option value="in-progress" {% if project.status == 'in-progress' %}selected{% endif %}>In Progress</option>
+                    <option value="planned" {% if project.status == 'planned' %}selected{% endif %}>Planned</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="description" class="form-label">Description *</label>
+            <textarea id="description" name="description" class="form-control" required>{{ project.description }}</textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="highlights" class="form-label">Key Highlights</label>
+            <textarea id="highlights" name="highlights" class="form-control">{% for highlight in project.highlights %}{{ highlight }}
+{% endfor %}</textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="keywords" class="form-label">Technologies/Keywords</label>
+            <input type="text" id="keywords" name="keywords" class="form-control" 
+                   value="{{ project.keywords|join(', ') }}">
+        </div>
+        
+        <div class="form-row">
+            <div class="form-group">
+                <label for="startDate" class="form-label">Start Date</label>
+                <input type="date" id="startDate" name="startDate" class="form-control" 
+                       value="{{ project.startDate }}">
+            </div>
+            <div class="form-group">
+                <label for="endDate" class="form-label">End Date</label>
+                <input type="date" id="endDate" name="endDate" class="form-control" 
+                       value="{{ project.endDate }}">
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="url" class="form-label">Project URL</label>
+            <input type="url" id="url" name="url" class="form-control" 
+                   value="{{ project.url }}">
+        </div>
+        
+        <div class="form-group">
+            <div class="checkbox-group">
+                <input type="checkbox" id="featured" name="featured" 
+                       {% if project.featured %}checked{% endif %}>
+                <label for="featured" class="form-label">Featured Project</label>
+            </div>
+        </div>
+        
+        <div class="btn-group">
+            <button type="submit" class="btn btn-primary">
+                <i class="fas fa-save"></i> Update Project
+            </button>
+            <a href="{{ url_for('admin_projects') }}" class="btn btn-secondary">
+                <i class="fas fa-times"></i> Cancel
+            </a>
+        </div>
+    </form>
+</div>
+{% endblock %}
